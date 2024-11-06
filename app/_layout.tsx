@@ -14,6 +14,7 @@ import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { persistor, store } from "@/store";
+import React from "react";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -44,6 +45,7 @@ export default function RootLayout() {
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" options={{ headerShown: false }} />
             <Stack.Screen name="web-view" options={{ headerShown: false }} />
+            <Stack.Screen name="rating" options={{ headerShown: false }} />
           </Stack>
           <ToastManager />
         </ThemeProvider>

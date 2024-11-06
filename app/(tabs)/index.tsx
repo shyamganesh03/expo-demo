@@ -1,7 +1,9 @@
-import { Image, StyleSheet, View } from "react-native";
-import { ThemedText } from "@/components/ThemedText";
+import React from "react";
+import { router } from "expo-router";
+import { Image, StyleSheet, View, Button } from "react-native";
 import IconImage from "@/assets/images/react-logo.png";
 import { useSelector } from "react-redux";
+import { ThemedText } from "@/components/ThemedText";
 import Container from "@/components/Container";
 
 export default function HomeScreen() {
@@ -26,17 +28,26 @@ export default function HomeScreen() {
         </View>
       </View>
 
-      <View style={styles.detsilsContainer}>
+      <View style={styles.detailsContainer}>
         <ThemedText type="defaultSemiBold">Phone No:</ThemedText>
         <ThemedText type="default">
           {userDetails?.phoneNumber || "-"}
         </ThemedText>
       </View>
 
-      <View style={styles.detsilsContainer}>
-        <ThemedText type="defaultSemiBold">Bith Date:</ThemedText>
+      <View style={styles.detailsContainer}>
+        <ThemedText type="defaultSemiBold">Birth Date:</ThemedText>
         <ThemedText type="default">{userDetails?.birthDate || "-"}</ThemedText>
       </View>
+
+      <Button
+        title="Rating"
+        onPress={() => {
+          router.push({
+            pathname: "/rating",
+          });
+        }}
+      />
     </Container>
   );
 }
@@ -57,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
   },
-  detsilsContainer: {
+  detailsContainer: {
     flexDirection: "row",
     gap: 12,
   },
