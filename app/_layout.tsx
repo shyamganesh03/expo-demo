@@ -38,9 +38,7 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
+        <ThemeProvider value={DefaultTheme}>
           <Stack initialRouteName="sign-in">
             <Stack.Screen name="sign-in" options={{ headerShown: false }} />
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
