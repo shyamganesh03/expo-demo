@@ -1,9 +1,15 @@
 import { Dimensions, StyleSheet, Text, View } from "react-native";
+import firestore from "@react-native-firebase/firestore";
 import React, { useState } from "react";
 import auth from "@react-native-firebase/auth";
 import InputText from "@/components/controlledComponents/InputText";
 import PasswordInput from "@/components/controlledComponents/PasswordInput";
 import Button from "@/components/controlledComponents/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserDetails } from "@/store/actions/user_profile";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "react-native-screens/lib/typescript/native-stack/types";
+import { RootStackParamList } from "./_layout";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -12,8 +18,13 @@ const SignIn = () => {
     userName: "",
     password: "",
   });
+  const userData = useSelector((state: any) => state.userDetails);
+  const dispatch = useDispatch();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const firebaseAuth = auth();
+  const usersCollection = firestore().collection("Users");
 
   const handleFirebaseLogin = async () => {
     try {
@@ -21,6 +32,18 @@ const SignIn = () => {
         loginDetails.userName,
         loginDetails.password
       );
+      if (loginResult.user.email) {
+        const userDetails = usersCollection.doc(loginResult.user.email).get();
+        const newUserDetails = {
+          ...userData?.userDetails,
+          [loginResult.user.email]: {
+            ...userDetails,
+          },
+          currentUser: loginResult.user.email,
+        };
+        dispatch(updateUserDetails(newUserDetails, userData));
+        navigation.navigate("home");
+      }
     } catch (error) {
       console.log({ error });
     }

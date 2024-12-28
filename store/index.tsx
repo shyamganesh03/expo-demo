@@ -10,12 +10,13 @@ const persistConfig = {
 
 const initialData: any = {
   userDetails: {
-    userImage: null,
-    firstName: "",
-    lastName: "",
-    emailAddress: "",
-    phoneNumber: "",
-    birthDate: "",
+    default: {
+      emailId: "",
+      fullName: "",
+      gender: "",
+      phoneNo: "",
+    },
+    currentUser: "",
   },
 };
 

@@ -12,18 +12,19 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import ToastManager from "expo-react-native-toastify";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import "react-native-reanimated";
 import { persistor, store } from "@/store";
 import React from "react";
 import { NativeStackNavigationProp } from "react-native-screens/lib/typescript/native-stack/types";
 
-type RootStackParamList = {
-  "sign-in": undefined;
-  home: undefined;
+export type RootStackParamList = {
   "(tabs)": undefined;
   "+not-found": undefined;
+  "sign-in": undefined;
   "web-view": undefined;
+  home: undefined;
+  profile: undefined;
   rating: undefined;
 };
 
@@ -78,6 +79,7 @@ export default function RootLayout() {
             <Stack initialRouteName="sign-in">
               <Stack.Screen name="sign-in" options={{ headerShown: false }} />
               <Stack.Screen name="home" options={{ headerShown: false }} />
+              <Stack.Screen name="profile" options={{ headerShown: false }} />
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen
                 name="+not-found"
